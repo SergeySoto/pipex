@@ -12,7 +12,7 @@ INCLUDE = ./libft/libft.h
 LIBFT = $(LIBFT_DIR)libft.a
 
 # Source files
-SRC = 
+SRC = main.c 
 
 # Object files (with obj/ prefix)
 OBJ = $(patsubst src/%.c, $(OBJ_DIR)/%.o, $(SRC))

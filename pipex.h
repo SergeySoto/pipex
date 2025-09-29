@@ -23,15 +23,19 @@ typedef struct t_pipe
 	int		pipefd[2];
 	pid_t	pid1;
 	pid_t	pid2;
-	char	*cmd2;
 	char	*cmd1;
+	char	*cmd2;
 	char	**path1;
 	char	**path2;
 	char	**env_path;
 	int		status_error;
 }			t_pipe;
 
-void	pipe_init(int argc, char **argv);
+//Utils
+void	print_array(char **argv);
+void	free_array(char **str);
+//
+t_pipe	pipe_init(int argc);
 char	*find_paths(char** envp);
 
 

@@ -6,7 +6,7 @@
 /*   By: ssoto-su <ssoto-su@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 15:47:59 by ssoto-su          #+#    #+#             */
-/*   Updated: 2025/09/29 21:14:02 by ssoto-su         ###   ########.fr       */
+/*   Updated: 2025/09/29 22:13:25 by ssoto-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ char	*find_paths(char** envp)
 	return (NULL);
 }
 
-void	set_cmd(char **argv, t_pipe *pipex)
+void	set_cmd(char **argv, t_pipe pipex)
 {
-	
+	pipex.cmd1 = ft_split(argv[2], ' ');
+	pipex.cmd2 = ft_split(argv[3], ' ');
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -59,17 +60,22 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	t_pipe	pipex;
 	char	*path_found;
-	// char	**path_array;
 	
 	pipex = pipe_init(argc);
 	path_found = find_paths(envp);
-	if (!path_found || !envp[0]) 
+	if (!path_found || !envp[0])
 		return (0);
 	else
-		pipex.env_path = ft_split(path_found, ';'); //en linux el separador es ':' y en windows es ';'
-	//path_array = ft_split(path_found, ';');
+		pipex.env_path = ft_split(path_found, ':'); //en linux el separador es ':' y en windows es ';'
+	set_cmd(argv, pipex);
+	//prints
 	print_array(pipex.env_path);
+	print_array(pipex.cmd1);
+	print_array(pipex.cmd2);
+	//frees
 	free_array(pipex.env_path);
+	free_array(pipex.cmd1);
+	free_array(pipex.cmd2);
 
 	return (0);
 }

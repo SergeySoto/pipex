@@ -37,7 +37,7 @@ void	free_array(char **str);
 //
 t_pipe	pipe_init(int argc);
 char	*find_paths(char** envp);
-void	set_cmd(char **argv, t_pipe pipex);
+void	set_cmd(char **argv, t_pipe *pipex);
 
 
 #endif

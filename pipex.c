@@ -6,7 +6,7 @@
 /*   By: ssoto-su <ssoto-su@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 15:47:59 by ssoto-su          #+#    #+#             */
-/*   Updated: 2025/09/29 22:13:25 by ssoto-su         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:14:52 by ssoto-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,31 @@ char	*find_paths(char** envp)
 	return (NULL);
 }
 
-void	set_cmd(char **argv, t_pipe pipex)
+void	set_cmd(char **argv, t_pipe *pipex)
 {
-	pipex.cmd1 = ft_split(argv[2], ' ');
-	pipex.cmd2 = ft_split(argv[3], ' ');
+	pipex->cmd1 = ft_split(argv[2], ' ');
+	pipex->cmd2 = ft_split(argv[3], ' ');
+	pipex->path1 = find_command(pipex->cmd1[0], pipex->env_path);
+	pipex->path2 = find_command(pipex->cmd2[0], pipex->env_path);
+}
+
+char	*find_command(char *cmd, char **env_path)
+{
+	int		i;
+	char	*aux;
+	char	*full_path;
+
+	i = 0;
+	while (env_path[i])
+	{
+		aux = ft_strjoin(env_path[i], "/");
+		full_path = ft_strjoin(aux, cmd);
+		if (access(full_path, F_OK | R_OK | W_OK | X_OK) == 0)
+			return (full_path);
+		free(full_path);
+		free(aux);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -67,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	else
 		pipex.env_path = ft_split(path_found, ':'); //en linux el separador es ':' y en windows es ';'
-	set_cmd(argv, pipex);
+	set_cmd(argv, &pipex);
 	//prints
 	print_array(pipex.env_path);
 	print_array(pipex.cmd1);

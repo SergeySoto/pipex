@@ -6,7 +6,7 @@
 /*   By: ssoto-su <ssoto-su@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 15:47:59 by ssoto-su          #+#    #+#             */
-/*   Updated: 2025/09/30 18:14:52 by ssoto-su         ###   ########.fr       */
+/*   Updated: 2025/10/01 14:40:59 by ssoto-su         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,26 @@ t_pipe	pipe_init(int argc)
 	return (pipex);
 }
 
-char	*find_paths(char** envp)
+void	find_paths(char** envp, t_pipe *pipex)
 {
 	int	i;
+	char	*path_found;
 
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0) //linux: "PATH=", 5, windows: "Path", 4
-			return (envp[i] + 5); //linux: + 5, windows: + 4
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			path_found = envp[i] + 5;
+			break ;
+		}
 		i++;
 	}
-	return (NULL);
+	if (!path_found || !envp[0])
+		return ;
+	else
+		pipex->env_path = ft_split(path_found, ':');
+	return ;
 }
 
 void	set_cmd(char **argv, t_pipe *pipex)
@@ -68,35 +76,35 @@ char	*find_command(char *cmd, char **env_path)
 	{
 		aux = ft_strjoin(env_path[i], "/");
 		full_path = ft_strjoin(aux, cmd);
-		if (access(full_path, F_OK | R_OK | W_OK | X_OK) == 0)
+		free(aux);
+		if (access(full_path, F_OK | X_OK) == 0)
 			return (full_path);
 		free(full_path);
-		free(aux);
 		i++;
 	}
+	return (NULL);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	t_pipe	pipex;
-	char	*path_found;
 	
 	pipex = pipe_init(argc);
-	path_found = find_paths(envp);
-	if (!path_found || !envp[0])
-		return (0);
-	else
-		pipex.env_path = ft_split(path_found, ':'); //en linux el separador es ':' y en windows es ';'
+	find_paths(envp, &pipex);
 	set_cmd(argv, &pipex);
+
 	//prints
 	print_array(pipex.env_path);
-	print_array(pipex.cmd1);
-	print_array(pipex.cmd2);
+	ft_pf_putstr("deberia salir el path abajo\n");
+	ft_pf_putstr(pipex.path1);
+	ft_pf_putstr(pipex.path2);
 	//frees
-	free_array(pipex.env_path);
-	free_array(pipex.cmd1);
-	free_array(pipex.cmd2);
-
+	free_all(pipex.env_path, NULL);
+	free_all(pipex.cmd1, NULL);
+	free_all(pipex.cmd2, NULL);
+	free_all(NULL ,pipex.path1);
+	free_all(NULL ,pipex.path2);
+	
 	return (0);
 }

@@ -33,10 +33,11 @@ typedef struct t_pipe
 
 //Utils
 void	print_array(char **argv);
-void	free_array(char **str);
+void	free_all(char **array, char *chr);
 //
 t_pipe	pipe_init(int argc);
-char	*find_paths(char** envp);
+void	find_paths(char** envp, t_pipe *pipex);
+char	*find_command(char *cmd, char **env_path);
 void	set_cmd(char **argv, t_pipe *pipex);
 
 

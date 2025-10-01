@@ -25,17 +25,22 @@ void	print_array(char **argv)
 	}
 }
 
-void	free_array(char **str)
+void	free_all(char **array, char *chr)
 {
 	int	i;
 
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i])
+	if (array)
 	{
-		free(str[i]);
-		i++;
+		i = 0;
+		while (array[i])
+		{
+			free(array[i]);
+			i++;
+		}
+		free(array);
 	}
-	free(str);
+	if (chr)
+	{
+		free(chr);
+	}
 }

@@ -14,6 +14,7 @@
 # define PIPEX_H
 # include "./libft/libft.h"
 # include <string.h>
+# include <unistd.h> 
 # include <sys/wait.h>
 
 typedef struct t_pipe
@@ -34,11 +35,17 @@ typedef struct t_pipe
 //Utils
 void	print_array(char **argv);
 void	free_all(char **array, char *chr);
-//
+void	printf_error(char *msg, int num_error);
+//Arguments
 t_pipe	pipe_init(int argc);
 void	find_paths(char** envp, t_pipe *pipex);
 char	*find_command(char *cmd, char **env_path);
 void	set_cmd(char **argv, t_pipe *pipex);
+//
+void	set_infile(t_pipe *pipex, char **argv);
+void	set_outfile(t_pipe *pipex, char **argv);
+void	set_pipe(t_pipe *pipex)
+
 
 
 #endif

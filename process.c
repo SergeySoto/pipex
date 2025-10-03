@@ -27,7 +27,10 @@ void	first_child(t_pipe *pipex, char **envp)
 		dup2(pipex->pipefd[1], STDOUT_FILENO);
 		ultimate_close(pipex);
 		if (execve(pipex->path1, pipex->cmd1, envp) == -1)
+		{
+			ultimate_free(pipex);
 			printf_error(pipex->cmd1[0], 127);
+		}
 	}	
 }
 
@@ -46,7 +49,10 @@ void	second_child(t_pipe *pipex, char **envp)
 		dup2(pipex->outfile, STDOUT_FILENO);
 		ultimate_close(pipex);
 		if (execve(pipex->path2, pipex->cmd2, envp) == -1)
+		{
+			ultimate_free(pipex);
 			printf_error(pipex->cmd2[0], 127);
+		}
 	}
 }
 

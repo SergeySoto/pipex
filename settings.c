@@ -45,11 +45,15 @@ void	set_files(t_pipe *pipex, char **argv)
 {
 	pipex->infile = open(argv[1], O_RDONLY);
 	if (pipex->infile == -1)
+	{
+		ultimate_free(pipex);
 		printf_error("Error: Fail opening infile\n", 1);	
+	}
 	pipex->outfile = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	if (pipex->outfile == -1)
 	{
 		close(pipex->infile);
+		ultimate_free(pipex);
 		printf_error("Error: Fail opening outfile\n", 1);
 	}
 }
@@ -60,6 +64,7 @@ void	set_pipe(t_pipe *pipex)
 	{
 		close(pipex->infile);
 		close(pipex->outfile);
+		ultimate_free(pipex);
 		printf_error("Error: Construction pipe failed\n", 1);
 	}
 }

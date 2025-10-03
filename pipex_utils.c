@@ -25,6 +25,23 @@ void	print_array(char **argv)
 	}
 }
 
+void	ultimate_close(t_pipe *pipex)
+{
+	close(pipex->infile);
+	close(pipex->outfile);
+	close(pipex->pipefd[0]);
+	close(pipex->pipefd[1]);
+}
+
+void	ultimate_free(t_pipe *pipex)
+{
+	free_all(pipex->env_path, NULL);
+	free_all(pipex->cmd1, NULL);
+	free_all(pipex->cmd2, NULL);
+	free_all(NULL ,pipex->path1);
+	free_all(NULL ,pipex->path2);
+}
+
 void	free_all(char **array, char *chr)
 {
 	int	i;

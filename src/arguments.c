@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 t_pipe	pipe_init(int argc)
 {
@@ -33,12 +33,13 @@ t_pipe	pipe_init(int argc)
 	return (pipex);
 }
 
-void	find_paths(char** envp, t_pipe *pipex)
+void	find_paths(char **envp, t_pipe *pipex)
 {
-	int	i;
+	int		i;
 	char	*path_found;
 
 	i = 0;
+	path_found = NULL;
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)

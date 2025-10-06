@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 void	first_child(t_pipe *pipex, char **envp)
 {
@@ -25,13 +25,15 @@ void	first_child(t_pipe *pipex, char **envp)
 	{
 		dup2(pipex->infile, STDIN_FILENO);
 		dup2(pipex->pipefd[1], STDOUT_FILENO);
-		ultimate_close(pipex);
+		close(pipex->infile);
+		close(pipex->pipefd[0]);
+		close(pipex->pipefd[1]);
 		if (execve(pipex->path1, pipex->cmd1, envp) == -1)
 		{
 			ultimate_free(pipex);
 			printf_error(pipex->cmd1[0], 127);
 		}
-	}	
+	}
 }
 
 void	second_child(t_pipe *pipex, char **envp)
@@ -60,9 +62,9 @@ int	father(t_pipe *pipex, char**envp)
 {
 	first_child(pipex, envp);
 	second_child(pipex, envp);
+	ultimate_close(pipex);
 	waitpid(pipex->pid1, NULL, 0);
 	waitpid(pipex->pid2, &pipex->status_error, 0);
-	ultimate_close(pipex);
 	ultimate_free(pipex);
 	return (WEXITSTATUS(pipex->status_error));
 }

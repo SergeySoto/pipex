@@ -42,7 +42,7 @@ void	free_all(char **array, char *chr);
 void	printf_error(char *msg, int num_error);
 //Arguments
 t_pipe	pipe_init(int argc);
-void	find_paths(char** envp, t_pipe *pipex);
+void	find_paths(char **envp, t_pipe *pipex);
 //Settings
 char	*find_command(char *cmd, char **env_path);
 void	set_cmd(char **argv, t_pipe *pipex);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 void	set_cmd(char **argv, t_pipe *pipex)
 {
@@ -47,7 +47,7 @@ void	set_files(t_pipe *pipex, char **argv)
 	if (pipex->infile == -1)
 	{
 		ultimate_free(pipex);
-		printf_error("Error: Fail opening infile\n", 1);	
+		printf_error("Error: Fail opening infile\n", 1);
 	}
 	pipex->outfile = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	if (pipex->outfile == -1)

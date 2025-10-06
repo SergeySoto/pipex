@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 void	print_array(char **argv)
 {
@@ -38,8 +38,8 @@ void	ultimate_free(t_pipe *pipex)
 	free_all(pipex->env_path, NULL);
 	free_all(pipex->cmd1, NULL);
 	free_all(pipex->cmd2, NULL);
-	free_all(NULL ,pipex->path1);
-	free_all(NULL ,pipex->path2);
+	free_all(NULL, pipex->path1);
+	free_all(NULL, pipex->path2);
 }
 
 void	free_all(char **array, char *chr)

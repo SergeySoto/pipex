@@ -80,5 +80,8 @@ void	printf_error(char *msg, int num_error)
 		exit(num_error);
 	}
 	else
+	{
 		ft_printf("%s", msg);
+		exit(num_error);
+	}
 }

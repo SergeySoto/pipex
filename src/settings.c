@@ -49,7 +49,7 @@ void	set_files(t_pipe *pipex, char **argv)
 		ultimate_free(pipex);
 		printf_error("Error: Fail opening infile\n", 1);
 	}
-	pipex->outfile = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	pipex->outfile = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (pipex->outfile == -1)
 	{
 		close(pipex->infile);

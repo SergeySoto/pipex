@@ -31,7 +31,7 @@ void	first_child(t_pipe *pipex, char **envp)
 		if (execve(pipex->path1, pipex->cmd1, envp) == -1)
 		{
 			ultimate_free(pipex);
-			printf_error(pipex->cmd1[0], 127);
+			printf_error(pipex->cmd1[0], 126);
 		}
 	}
 }
@@ -53,7 +53,7 @@ void	second_child(t_pipe *pipex, char **envp)
 		if (execve(pipex->path2, pipex->cmd2, envp) == -1)
 		{
 			ultimate_free(pipex);
-			printf_error(pipex->cmd2[0], 127);
+			printf_error(pipex->cmd2[0], 126);
 		}
 	}
 }

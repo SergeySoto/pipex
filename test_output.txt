@@ -1,5 +1,0 @@
-arguments.c
-pipex.c
-pipex_utils.c
-process.c
-settings.c

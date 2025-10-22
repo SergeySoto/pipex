@@ -49,9 +49,9 @@ void	set_cmd(char **argv, t_pipe *pipex)
 		free_all(pipex->env_path, NULL);
 		printf_error(argv[3], 127);
 	}
-	check_command(argv, pipex);
 	pipex->path1 = find_command(pipex->cmd1[0], pipex->env_path);
 	pipex->path2 = find_command(pipex->cmd2[0], pipex->env_path);
+	check_command(argv, pipex);
 }
 
 char	*find_command(char *cmd, char **env_path)

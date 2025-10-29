@@ -12,24 +12,24 @@
 
 #include "../pipex.h"
 
-static void	check_command(char **argv, t_pipe *pipex)
-{
-	if (!pipex->path1)
-	{
-		free_all(pipex->env_path, NULL);
-		free_all(pipex->cmd1, NULL);
-		free_all(pipex->cmd2, NULL);
-		printf_error(argv[2], 127);
-	}
-	if (!pipex->path2)
-	{
-		free_all(pipex->env_path, NULL);
-		free_all(pipex->cmd1, NULL);
-		free_all(pipex->cmd2, NULL);
-		free_all(NULL, pipex->path1);
-		printf_error(argv[3], 127);
-	}
-}
+// void	check_command(char **argv, t_pipe *pipex)
+// {
+// 	if (!pipex->path1)
+// 	{
+// 		free_all(pipex->env_path, NULL);
+// 		free_all(pipex->cmd1, NULL);
+// 		free_all(pipex->cmd2, NULL);
+// 		printf_error(argv[2], 127);
+// 	}
+// 	if (!pipex->path2)
+// 	{
+// 		free_all(pipex->env_path, NULL);
+// 		free_all(pipex->cmd1, NULL);
+// 		free_all(pipex->cmd2, NULL);
+// 		free_all(NULL, pipex->path1);
+// 		printf_error(argv[3], 127);
+// 	}
+// }
 
 void	set_cmd(char **argv, t_pipe *pipex)
 {
@@ -51,7 +51,6 @@ void	set_cmd(char **argv, t_pipe *pipex)
 	}
 	pipex->path1 = find_command(pipex->cmd1[0], pipex->env_path);
 	pipex->path2 = find_command(pipex->cmd2[0], pipex->env_path);
-	check_command(argv, pipex);
 }
 
 char	*find_command(char *cmd, char **env_path)

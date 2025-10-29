@@ -50,8 +50,10 @@ void	set_cmd(char **argv, t_pipe *pipex);
 void	set_files(t_pipe *pipex, char **argv);
 void	set_pipe(t_pipe *pipex);
 //Process
-void	first_child(t_pipe *pipex, char **envp);
-void	second_child(t_pipe *pipex, char **envp);
-int		father(t_pipe *pipex, char**envp);
+void	check_command_i(char **argv, t_pipe *pipex);
+void	check_command_ii(char **argv, t_pipe *pipex);
+void	first_child(t_pipe *pipex, char **envp, char **argv);
+void	second_child(t_pipe *pipex, char **envp, char **argv);
+int		father(t_pipe *pipex, char**envp, char **argv);
 
 #endif

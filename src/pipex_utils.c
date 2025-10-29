@@ -66,22 +66,26 @@ void	printf_error(char *msg, int num_error)
 {
 	if (num_error == 1)
 	{
-		ft_printf("%s\n", msg);
+		ft_putendl_fd(msg, 2);
 		exit(num_error);
 	}
 	else if (num_error == 126)
 	{
-		ft_printf("Error: '%s' does not have execution permissions\n", msg);
+		ft_putstr_fd("Error: '", 2);
+		ft_putstr_fd(msg, 2);
+		ft_putstr_fd("' does not have execution permissions\n", 2);
 		exit(num_error);
 	}
 	else if (num_error == 127)
 	{
-		ft_printf("Error: Command '%s' not found\n", msg);
+		ft_putstr_fd("Error: Command '", 2);
+		ft_putstr_fd(msg, 2);
+		ft_putstr_fd("' not found\n", 2);
 		exit(num_error);
 	}
 	else
 	{
-		ft_printf("%s\n", msg);
+		ft_putendl_fd(msg, 2);
 		exit(num_error);
 	}
 }

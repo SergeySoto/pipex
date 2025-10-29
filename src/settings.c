@@ -12,25 +12,6 @@
 
 #include "../pipex.h"
 
-// void	check_command(char **argv, t_pipe *pipex)
-// {
-// 	if (!pipex->path1)
-// 	{
-// 		free_all(pipex->env_path, NULL);
-// 		free_all(pipex->cmd1, NULL);
-// 		free_all(pipex->cmd2, NULL);
-// 		printf_error(argv[2], 127);
-// 	}
-// 	if (!pipex->path2)
-// 	{
-// 		free_all(pipex->env_path, NULL);
-// 		free_all(pipex->cmd1, NULL);
-// 		free_all(pipex->cmd2, NULL);
-// 		free_all(NULL, pipex->path1);
-// 		printf_error(argv[3], 127);
-// 	}
-// }
-
 void	set_cmd(char **argv, t_pipe *pipex)
 {
 	pipex->cmd1 = ft_split(argv[2], ' ');

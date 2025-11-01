@@ -33,6 +33,7 @@ t_pipe	pipe_init(int argc)
 	return (pipex);
 }
 
+//Returns char** with the enviroment path
 void	find_paths(char **envp, t_pipe *pipex)
 {
 	int		i;
